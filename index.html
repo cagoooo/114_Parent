@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>桃園市龍潭區石門國民小學114學年度親職教育日</title>
     <!-- 引入圓潤可愛的字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
+            /* 移除 overflow-x: hidden，避免 LINE WebView 判斷錯誤 */
         }
 
         /* 動態背景裝飾 */
@@ -41,7 +41,7 @@
             top: 0;
             left: 0;
             z-index: -1;
-            overflow: hidden;
+            overflow: hidden; /* 將 hidden 移至背景層，防止水平捲軸出現 */
             pointer-events: none;
         }
         .bg-bubble {
@@ -78,6 +78,7 @@
             box-shadow: 0 15px 35px rgba(255, 107, 129, 0.3);
             position: relative;
             overflow: hidden;
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         .header::after {
@@ -134,13 +135,14 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             text-align: center;
             position: sticky;
-            top: 20px;
+            top: 15px;
             z-index: 100;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
             border: 2px solid rgba(255,255,255,0.5);
+            animation: slideDown 0.8s ease forwards;
         }
 
         .nav-btn {
@@ -162,6 +164,20 @@
             box-shadow: 0 5px 15px rgba(236, 204, 104, 0.4);
         }
 
+        /* --- CSS 原生進場動畫 (解決 LINE WebView 看不到內容的 Bug) --- */
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUpSafe {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* 各區塊共用設定 */
         .section {
             background: var(--white-glass);
@@ -171,16 +187,18 @@
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.05);
             border: 1px solid rgba(255,255,255,0.6);
-            scroll-margin-top: 100px; 
+            scroll-margin-top: 120px; 
+            
+            /* 使用純 CSS 動畫確保元件 100% 顯示 */
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            animation: fadeInUpSafe 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* 設定不同區塊的延遲進場時間，營造層次感 */
+        #welcome { animation-delay: 0.2s; }
+        #schedule { animation-delay: 0.4s; }
+        #activities { animation-delay: 0.6s; }
+        #contact { animation-delay: 0.8s; }
 
         .section-title {
             text-align: center;
@@ -204,7 +222,7 @@
             border-radius: 2px;
         }
 
-        /* --- 歡迎區塊 --- */
+        /* --- 歡迎區塊 (立體貼紙日期) --- */
         .welcome-content {
             text-align: center;
             font-size: 1.2rem;
@@ -214,6 +232,8 @@
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
+        
+        /* 充滿童趣的立體貼紙日期 UI */
         .highlight-date {
             background: #ffffff;
             color: var(--text-main);
@@ -227,7 +247,14 @@
             position: relative;
             top: -2px;
             letter-spacing: 1px;
+            transition: transform 0.2s ease;
         }
+        
+        .highlight-date:hover {
+            transform: translateY(2px) translateX(2px);
+            box-shadow: 2px 2px 0px var(--quaternary);
+        }
+
         .organizers {
             margin-top: 30px;
             font-size: 1.3rem;
@@ -239,7 +266,7 @@
             display: inline-block;
         }
 
-        /* --- 時程表 (RWD 優化核心) --- */
+        /* --- 時程表 (RWD 卡片化) --- */
         .table-responsive {
             width: 100%;
             overflow-x: auto;
@@ -249,7 +276,6 @@
 
         .schedule-table {
             width: 100%;
-            /* 增加桌機版最小寬度，防止在大螢幕時文字過度換行 */
             min-width: 850px; 
             border-collapse: collapse;
             background: white;
@@ -299,7 +325,7 @@
             display: none;
         }
 
-        /* --- 手機版表格卡片化 (極致 RWD 體驗) --- */
+        /* 手機版表格卡片化 */
         @media (max-width: 768px) {
             .desktop-only { display: none !important; }
             .mobile-only { display: block; }
@@ -307,16 +333,16 @@
             .table-responsive {
                 box-shadow: none;
                 background: transparent;
-                overflow-x: hidden; /* 取消水平捲動，完全自適應寬度 */
+                overflow-x: hidden;
             }
             
             .schedule-table {
-                min-width: 100%; /* 取消固定寬度 */
+                min-width: 100%;
                 background: transparent;
             }
             
             .schedule-table thead {
-                display: none; /* 隱藏傳統表頭 */
+                display: none;
             }
             
             .schedule-table tbody, 
@@ -326,7 +352,6 @@
                 width: 100%;
             }
             
-            /* 將每一行轉換成獨立的卡片 */
             .schedule-table tr {
                 margin-bottom: 20px;
                 background: rgba(255, 255, 255, 0.95);
@@ -334,23 +359,15 @@
                 padding: 15px;
                 box-shadow: 0 8px 25px rgba(0,0,0,0.06);
                 border: 2px solid white;
-                transition: transform 0.3s ease;
             }
             
-            .schedule-table tr:hover {
-                transform: translateY(-5px);
-                background: white;
-                box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-            }
-            
-            /* 卡片內的資訊欄位排版 */
             .schedule-table td {
                 padding: 12px 10px !important;
                 border: none;
                 border-bottom: 1px dashed rgba(0,0,0,0.1);
                 text-align: left;
                 display: flex;
-                flex-direction: column; /* 讓標題與內容上下排列，解決擠壓問題 */
+                flex-direction: column;
                 gap: 6px;
             }
             
@@ -358,7 +375,6 @@
                 border-bottom: none;
             }
             
-            /* 動態產生標題 (透過 HTML 的 data-label) */
             .schedule-table td::before {
                 content: attr(data-label);
                 font-weight: 900;
@@ -371,7 +387,6 @@
                 width: fit-content;
             }
             
-            /* 手機版專用時間標籤 */
             .mobile-time-badge {
                 display: inline-block;
                 background: linear-gradient(45deg, var(--primary), #ff4757);
@@ -385,7 +400,6 @@
                 box-shadow: 0 4px 10px rgba(255, 71, 87, 0.2);
             }
 
-            /* 移除原本的斑馬紋與 hover 背景色，避免破壞卡片美感 */
             .schedule-table tr:nth-child(even) td { background: transparent; }
             .schedule-table tr:hover td { background: transparent; }
         }
@@ -524,7 +538,7 @@
             100% { transform: scale(0) rotate(180deg); opacity: 0; }
         }
 
-        /* --- 響應式微調 (其他區塊) --- */
+        /* --- 響應式微調 --- */
         @media (max-width: 768px) {
             .header h1 { font-size: 2rem; }
             .header h2 { font-size: 1.4rem; }
@@ -589,7 +603,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- 每一格都加入了 data-label 以支援手機版卡片標籤顯示 -->
                         <tr>
                             <td data-label="項次">1</td>
                             <td data-label="時間">07:45~08:05</td>
@@ -603,7 +616,7 @@
                             <td data-label="地點">大操場</td>
                         </tr>
                         
-                        <!-- 以下 8 列為合併群組，為手機版特別安插了 mobile-time-badge 徽章 -->
+                        <!-- 以下 8 列為合併群組 -->
                         <tr>
                             <td rowspan="8" class="row-span-cell desktop-only" data-label="項次">3</td>
                             <td rowspan="8" class="row-span-cell desktop-only" data-label="時間">09:30~11:30</td>
@@ -662,7 +675,6 @@
                             </td>
                             <td data-label="地點">特色餐教室</td>
                         </tr>
-                        <!-- 群組結束 -->
 
                         <tr>
                             <td data-label="項次">4</td>
@@ -814,31 +826,10 @@
         function createSparkleAtMouse() {
             createSparkle({ clientX: mouseX, clientY: mouseY });
         }
-
-        // 4. 滾動視差與淡入動畫 (Intersection Observer)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
-
-        window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('welcome').classList.add('visible');
-            }, 300);
-        };
+        
+        // 注意：為了確保 LINE WebView 完全相容，已移除原本的 IntersectionObserver
+        // 改為純 CSS Keyframes 原生動畫 (.section 的 fadeInUpSafe 動畫)
+        // 這樣能保證載入時 100% 顯示所有內容！
     </script>
 </body>
 </html>
