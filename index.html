@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桃園市龍潭區石門國民小學114學年度親職教育日</title>
+    <!-- 引入圓潤可愛的字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6b81;
+            --secondary: #7bed9f;
+            --tertiary: #70a1ff;
+            --quaternary: #eccc68;
+            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            --text-main: #2f3542;
+            --white-glass: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 動態背景裝飾 */
+        .bg-decoration {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .bg-bubble {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            animation: float-slow 15s infinite alternate ease-in-out;
+        }
+        .bg-bubble:nth-child(1) { width: 400px; height: 400px; background: #ff9a9e; top: -10%; left: -10%; }
+        .bg-bubble:nth-child(2) { width: 500px; height: 500px; background: #a1c4fd; bottom: -20%; right: -10%; animation-delay: -5s; }
+        .bg-bubble:nth-child(3) { width: 300px; height: 300px; background: #fbc2eb; top: 40%; left: 40%; animation-delay: -10s; }
+
+        @keyframes float-slow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* --- Header 視覺 --- */
+        .header {
+            background: linear-gradient(135deg, var(--primary), #ffa502);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(255, 107, 129, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="2" fill="white" fill-opacity="0.2"/></svg>');
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .sun-icon {
+            font-size: 4rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            animation: pulse-rotate 4s infinite alternate;
+            filter: drop-shadow(0 0 10px rgba(255,255,0,0.5));
+        }
+
+        @keyframes pulse-rotate {
+            0% { transform: rotate(-10deg) scale(1); }
+            100% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        /* --- 導覽列 --- */
+        .nav {
+            background: var(--white-glass);
+            backdrop-filter: blur(15px);
+            padding: 15px;
+            border-radius: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid transparent;
+            padding: 10px 25px;
+            border-radius: 30px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-btn:hover {
+            background: var(--quaternary);
+            color: #fff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(236, 204, 104, 0.4);
+        }
+
+        /* 各區塊共用設定 */
+        .section {
+            background: var(--white-glass);
+            backdrop-filter: blur(15px);
+            margin-bottom: 40px;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.6);
+            scroll-margin-top: 100px; 
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--tertiary));
+            border-radius: 2px;
+        }
+
+        /* --- 歡迎區塊 --- */
+        .welcome-content {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .welcome-content h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .highlight-date {
+            background: #ffffff;
+            color: var(--text-main);
+            padding: 4px 18px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 900;
+            margin: 0 6px;
+            border: 2px solid var(--primary);
+            box-shadow: 4px 4px 0px var(--quaternary);
+            position: relative;
+            top: -2px;
+            letter-spacing: 1px;
+        }
+        .organizers {
+            margin-top: 30px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--tertiary);
+            background: rgba(112, 161, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        /* --- 時程表 (RWD 優化核心) --- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .schedule-table {
+            width: 100%;
+            /* 增加桌機版最小寬度，防止在大螢幕時文字過度換行 */
+            min-width: 850px; 
+            border-collapse: collapse;
+            background: white;
+            text-align: center;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 18px 15px;
+            border: 1px solid #f1f2f6;
+            vertical-align: middle;
+        }
+
+        .schedule-table th {
+            background: var(--tertiary);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+        }
+
+        .schedule-table tr {
+            transition: all 0.3s ease;
+        }
+
+        .schedule-table tr:nth-child(even) td {
+            background: rgba(112, 161, 255, 0.03);
+        }
+
+        .schedule-table tr:hover td {
+            background: rgba(236, 204, 104, 0.1);
+        }
+
+        .schedule-table td {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #57606f;
+        }
+        
+        .row-span-cell {
+            background: rgba(123, 237, 159, 0.1) !important;
+            font-weight: 900 !important;
+            color: #2ed573 !important;
+        }
+
+        .mobile-only {
+            display: none;
+        }
+
+        /* --- 手機版表格卡片化 (極致 RWD 體驗) --- */
+        @media (max-width: 768px) {
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block; }
+            
+            .table-responsive {
+                box-shadow: none;
+                background: transparent;
+                overflow-x: hidden; /* 取消水平捲動，完全自適應寬度 */
+            }
+            
+            .schedule-table {
+                min-width: 100%; /* 取消固定寬度 */
+                background: transparent;
+            }
+            
+            .schedule-table thead {
+                display: none; /* 隱藏傳統表頭 */
+            }
+            
+            .schedule-table tbody, 
+            .schedule-table tr, 
+            .schedule-table td {
+                display: block;
+                width: 100%;
+            }
+            
+            /* 將每一行轉換成獨立的卡片 */
+            .schedule-table tr {
+                margin-bottom: 20px;
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 20px;
+                padding: 15px;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+                border: 2px solid white;
+                transition: transform 0.3s ease;
+            }
+            
+            .schedule-table tr:hover {
+                transform: translateY(-5px);
+                background: white;
+                box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            }
+            
+            /* 卡片內的資訊欄位排版 */
+            .schedule-table td {
+                padding: 12px 10px !important;
+                border: none;
+                border-bottom: 1px dashed rgba(0,0,0,0.1);
+                text-align: left;
+                display: flex;
+                flex-direction: column; /* 讓標題與內容上下排列，解決擠壓問題 */
+                gap: 6px;
+            }
+            
+            .schedule-table td:last-child {
+                border-bottom: none;
+            }
+            
+            /* 動態產生標題 (透過 HTML 的 data-label) */
+            .schedule-table td::before {
+                content: attr(data-label);
+                font-weight: 900;
+                color: var(--tertiary);
+                font-size: 0.95rem;
+                display: inline-block;
+                background: rgba(112, 161, 255, 0.15);
+                padding: 3px 10px;
+                border-radius: 10px;
+                width: fit-content;
+            }
+            
+            /* 手機版專用時間標籤 */
+            .mobile-time-badge {
+                display: inline-block;
+                background: linear-gradient(45deg, var(--primary), #ff4757);
+                color: white;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 0.95rem;
+                font-weight: 800;
+                margin-bottom: 8px;
+                width: fit-content;
+                box-shadow: 0 4px 10px rgba(255, 71, 87, 0.2);
+            }
+
+            /* 移除原本的斑馬紋與 hover 背景色，避免破壞卡片美感 */
+            .schedule-table tr:nth-child(even) td { background: transparent; }
+            .schedule-table tr:hover td { background: transparent; }
+        }
+
+        /* --- 精彩活動卡片 --- */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid #f1f2f6;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+        }
+        .activity-card:nth-child(1)::before { background: var(--primary); }
+        .activity-card:nth-child(2)::before { background: var(--secondary); }
+        .activity-card:nth-child(3)::before { background: var(--tertiary); }
+        .activity-card:nth-child(4)::before { background: var(--quaternary); }
+        .activity-card:nth-child(5)::before { background: #a29bfe; }
+        .activity-card:nth-child(6)::before { background: #fd79a8; }
+
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+
+        .activity-card .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .activity-card:hover .emoji {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .activity-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .activity-card p {
+            color: #747d8c;
+            font-size: 1rem;
+        }
+
+        /* --- 聯絡資訊與按鈕 --- */
+        .contact-content {
+            text-align: center;
+        }
+        
+        .contact-info-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .interactive-btn {
+            background: linear-gradient(45deg, var(--primary), #ff4757);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .interactive-btn.blue { background: linear-gradient(45deg, var(--tertiary), #1e90ff); box-shadow: 0 8px 20px rgba(30, 144, 255, 0.3); }
+        .interactive-btn.green { background: linear-gradient(45deg, #2ed573, #2bcbba); box-shadow: 0 8px 20px rgba(46, 213, 115, 0.3); }
+
+        .interactive-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+        
+        .interactive-btn:active {
+            transform: translateY(2px) scale(0.95);
+        }
+
+        /* --- 特效動畫 --- */
+        .heart {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: float-up 5s ease-in-out forwards;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; transform: translateY(80vh) scale(1.2) rotate(-15deg); }
+            100% { transform: translateY(-100px) scale(1) rotate(30deg); opacity: 0; }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            animation: pop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(90deg); opacity: 1; }
+            100% { transform: scale(0) rotate(180deg); opacity: 0; }
+        }
+
+        /* --- 響應式微調 (其他區塊) --- */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .header h2 { font-size: 1.4rem; }
+            .section { padding: 25px 15px; }
+            .nav { border-radius: 20px; padding: 10px; }
+            .nav-btn { padding: 8px 15px; font-size: 1rem; }
+            .btn-container { flex-direction: column; align-items: stretch; }
+            .interactive-btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景裝飾 -->
+    <div class="bg-decoration">
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+        <div class="bg-bubble"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="sun-icon">🌞</div>
+            <h1>桃園市龍潭區石門國民小學</h1>
+            <h2>114學年度親職教育日活動通知函</h2>
+            <div class="subtitle">✨ 一起共度歡樂的親子時光 ✨</div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn" onclick="scrollToSection('welcome')">💌 活動邀請</button>
+            <button class="nav-btn" onclick="scrollToSection('schedule')">🕒 活動時程</button>
+            <button class="nav-btn" onclick="scrollToSection('activities')">🎈 精彩活動</button>
+            <button class="nav-btn" onclick="scrollToSection('contact')">📞 聯絡我們</button>
+        </nav>
+
+        <!-- Welcome Section -->
+        <section id="welcome" class="section">
+            <h2 class="section-title">活動邀請</h2>
+            <div class="welcome-content">
+                <h3>親愛的家長，您好：</h3>
+                <p>本校謹訂於 <span class="highlight-date">📅 115年3月28日（星期六）</span> 舉辦親職教育日系列活動。<br>孩子們用心準備了豐富的表演與成果，我們竭誠邀請您撥冗參與，一起共度充滿歡樂與感動的親子時光！</p>
+                <div class="organizers">
+                    石門國小校長 張定貴<br>
+                    家長會長 黃琬瑄&nbsp;&nbsp;敬邀
+                </div>
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="section">
+            <h2 class="section-title">活動時程表</h2>
+            <div class="table-responsive">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th width="8%">項次</th>
+                            <th width="22%">時間</th>
+                            <th width="45%">活動項目</th>
+                            <th width="25%">地點</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 每一格都加入了 data-label 以支援手機版卡片標籤顯示 -->
+                        <tr>
+                            <td data-label="項次">1</td>
+                            <td data-label="時間">07:45~08:05</td>
+                            <td data-label="活動項目">晨讀(MSSR)</td>
+                            <td data-label="地點">各班教室</td>
+                        </tr>
+                        <tr>
+                            <td data-label="項次">2</td>
+                            <td data-label="時間">08:25~09:15</td>
+                            <td data-label="活動項目">親職教育日表揚大會</td>
+                            <td data-label="地點">大操場</td>
+                        </tr>
+                        
+                        <!-- 以下 8 列為合併群組，為手機版特別安插了 mobile-time-badge 徽章 -->
+                        <tr>
+                            <td rowspan="8" class="row-span-cell desktop-only" data-label="項次">3</td>
+                            <td rowspan="8" class="row-span-cell desktop-only" data-label="時間">09:30~11:30</td>
+                            <td data-label="活動項目">
+                                <div class="mobile-only mobile-time-badge">🕒 09:30~11:30</div>
+                                <span style="font-weight:bold; color:var(--primary);">各年級靜態成果展及動態活動<br>（闖關遊戲及園遊會）</span>
+                            </td>
+                            <td data-label="地點" style="font-weight:bold;">各班教室及籃球場</td>
+                        </tr>
+                        <tr>
+                            <td data-label="活動項目">
+                                <div class="mobile-only mobile-time-badge">🕒 09:30~11:30</div>
+                                3D列印小物(家長會)
+                            </td>
+                            <td data-label="地點">籃球場旁</td>
+                        </tr>
+                        <tr>
+                            <td data-label="活動項目">
+                                <div class="mobile-only mobile-time-badge">🕒 09:30~11:30</div>
+                                童軍體驗活動
+                            </td>
+                            <td data-label="地點">籃球場旁</td>
+                        </tr>
+                        <tr>
+                            <td data-label="活動項目">
+                                <div class="mobile-only mobile-time-badge">🕒 09:30~11:30</div>
+                                ~出色石門~<br>COLOR ME
+                            </td>
+                            <td data-label="地點">一年級課照班</td>
+                        </tr>
+                        <tr>
+                            <td data-label="活動項目">
+                                <div class="mobile-only mobile-time-badge">🕒 09:30~11:30</div>
+                                親子拍照打卡
+                            </td>
+                            <td data-label="地點">前門圓環</td>
+                        </tr>
+                        <tr>
+                            <td data-label="活動項目">
+                                <div class="mobile-only mobile-time-badge">🕒 09:30~11:30</div>
+                                性平教育書展
+                            </td>
+                            <td data-label="地點">圖書館</td>
+                        </tr>
+                        <tr>
+                            <td data-label="活動項目">
+                                <div class="mobile-only mobile-time-badge">🕒 09:30~11:30</div>
+                                升學輔導展示<br>性平及家庭教育宣導<br>國樂團招生表演<br>童軍義賣<br>為書找新家<br>專題探究課程成果展<br>星空計畫作品展示
+                            </td>
+                            <td data-label="地點">彩虹走廊</td>
+                        </tr>
+                        <tr>
+                            <td data-label="活動項目">
+                                <div class="mobile-only mobile-time-badge">🕒 09:30~11:30</div>
+                                咖啡吧
+                            </td>
+                            <td data-label="地點">特色餐教室</td>
+                        </tr>
+                        <!-- 群組結束 -->
+
+                        <tr>
+                            <td data-label="項次">4</td>
+                            <td data-label="時間">09:50~11:30</td>
+                            <td data-label="活動項目">親職教育講座：<br>陪孩子走一段健康的成長路<br><small>(吉靜如 少年保護官)</small></td>
+                            <td data-label="地點">大禮堂</td>
+                        </tr>
+                        <tr>
+                            <td data-label="項次">5</td>
+                            <td data-label="時間">11:50~13:00</td>
+                            <td data-label="活動項目">用餐暨環境整理</td>
+                            <td data-label="地點">各班教室</td>
+                        </tr>
+                        <tr>
+                            <td data-label="項次">6</td>
+                            <td data-label="時間">13:00</td>
+                            <td data-label="活動項目">學生放學</td>
+                            <td data-label="地點">各班教室</td>
+                        </tr>
+                        <tr>
+                            <td data-label="項次">7</td>
+                            <td data-label="時間">13:00~15:40</td>
+                            <td data-label="活動項目">靜態展覽、家庭訪視</td>
+                            <td data-label="地點">各班教室</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Activities Section -->
+        <section id="activities" class="section">
+            <h2 class="section-title">精彩活動快覽</h2>
+            <div class="activity-grid">
+                <div class="activity-card interactive-element">
+                    <span class="emoji">🎨</span>
+                    <h4>創意體驗</h4>
+                    <p>3D列印小物製作、COLOR ME著色活動、童軍體驗</p>
+                </div>
+                <div class="activity-card interactive-element">
+                    <span class="emoji">💡</span>
+                    <h4>學習成果</h4>
+                    <p>各年級靜態成果、專題探究、星空計畫作品展</p>
+                </div>
+                <div class="activity-card interactive-element">
+                    <span class="emoji">🎵</span>
+                    <h4>表演藝術</h4>
+                    <p>國樂團招生表演、多元才藝展現</p>
+                </div>
+                <div class="activity-card interactive-element">
+                    <span class="emoji">🎪</span>
+                    <h4>歡樂園遊會</h4>
+                    <p>趣味闖關遊戲、班級攤位、童軍義賣</p>
+                </div>
+                <div class="activity-card interactive-element">
+                    <span class="emoji">📚</span>
+                    <h4>教育資源</h4>
+                    <p>性平教育書展、升學輔導、親職講座</p>
+                </div>
+                <div class="activity-card interactive-element">
+                    <span class="emoji">☕</span>
+                    <h4>溫馨咖啡吧</h4>
+                    <p>特色餐教室提供舒適休憩空間</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2 class="section-title">聯絡我們</h2>
+            <div class="contact-content">
+                <div class="contact-info-text">
+                    <p>🏫 桃園市龍潭區石門國民小學</p>
+                    <p>校長：張定貴 | 家長會長：黃琬瑄</p>
+                </div>
+                
+                <div class="btn-container">
+                    <a href="https://www.smes.tyc.edu.tw" target="_blank" rel="noopener noreferrer" class="interactive-btn blue">
+                        🌐 前往學校官網
+                    </a>
+                    <a href="tel:03-471-1752" target="_blank" class="interactive-btn green">
+                        📞 撥打聯絡電話 (03)471-1752
+                    </a>
+                    <a href="mailto:ipad@mail2.smes.tyc.edu.tw" target="_blank" class="interactive-btn">
+                        📧 寄送電子郵件
+                    </a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=桃園市龍潭區石門國民小學" target="_blank" rel="noopener noreferrer" class="interactive-btn" style="background: linear-gradient(45deg, #ffa502, #ff7f50);">
+                        🗺️ 查看學校地圖
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // 1. 書籤平滑捲動功能 (Smooth Scroll)
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                createSparkleAtMouse();
+            }
+        }
+
+        // 2. 隨機飄浮愛心動畫
+        const emojis = ['💖', '✨', '🎈', '🌟'];
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.style.left = Math.random() * 95 + 'vw';
+            heart.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 2500);
+
+        // 3. 點擊星光特效
+        function createSparkle(e) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerText = '✨';
+            sparkle.style.left = (e.clientX - 10) + 'px';
+            sparkle.style.top = (e.clientY - 10) + 'px';
+            sparkle.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 800);
+        }
+
+        document.querySelectorAll('.nav-btn, .interactive-btn, .interactive-element').forEach(el => {
+            el.addEventListener('click', createSparkle);
+        });
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        function createSparkleAtMouse() {
+            createSparkle({ clientX: mouseX, clientY: mouseY });
+        }
+
+        // 4. 滾動視差與淡入動畫 (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('welcome').classList.add('visible');
+            }, 300);
+        };
+    </script>
+</body>
+</html>
